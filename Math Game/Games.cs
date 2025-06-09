@@ -9,7 +9,22 @@ namespace Math_Game
 {
     internal class Games
     {
+        private Menu? _menu;
+        private string _name;
+        private DateTime _date;
+        private List<Results> _results;
         Random random = new Random();
+        
+        public Games(string name, DateTime date, List<Results> results)
+        {
+            _name = name;
+            _date = date;
+            _results = results;
+        }
+        public void SetMenu(Menu menu)
+        {
+            _menu = menu;
+        }
         internal void AdditionGame()
         {
             int score = 0;
@@ -18,31 +33,46 @@ namespace Math_Game
             Console.ReadKey();
             for(int i = 0; i < 5; i++)
             {
-                int number1 = random.Next(1, 10);
-                int number2 = random.Next(1, 10);
+                int number1 = random.Next(1, 30);
+                int number2 = random.Next(1, 30);
 
                 Console.WriteLine($"{number1} + {number2} =");
-                string? result = Console.ReadLine();
-
-                if(Convert.ToInt32(result) == number1 + number2)
+                string? input = Console.ReadLine();
+                int result;
+                if(int.TryParse(input, out result))
                 {
-                    score++;   
+                    if (result == number1 + number2)
+                    {
+                        score++;
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("Invalid input, please input the number !!!");
+                    continue;
+                }                
             }
             if(score > 3)
             {
-                Console.WriteLine($"Congratulations, your score is {score}.");
-                Thread.Sleep(1000);
-                Environment.Exit(0);
+                _results.Add(new Results
+                {
+                    ResultName = _name,
+                    ResultDate = _date,
+                    ResultScore = score
+                });
+                _menu.CongratulationsMethod(_name, _date, score);
             }
             else
             {
-                Console.WriteLine($"Maybe you will have better luck next time, your score is {score}.");
-                Thread.Sleep(1000);
-                Environment.Exit(0);
+                _results.Add(new Results
+                {
+                    ResultName = _name,
+                    ResultDate = _date,
+                    ResultScore = score
+                });
+                _menu.LoserMethod(_name, _date, score);
             }
         }
-
         internal void SubstractionGame()
         {
             int score = 0;
@@ -59,24 +89,41 @@ namespace Math_Game
                 } while (number1 <= number2);
 
                 Console.WriteLine($"{number1} - {number2} =");
-                string? result = Console.ReadLine();
+                string? input = Console.ReadLine();
+                int result;
 
-                if (Convert.ToInt32(result) == number1 - number2)
+                if (int.TryParse(input, out result))
                 {
-                    score++;
+                    if (result == number1 - number2)
+                    {
+                        score++;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input, please input the number !!!");
+                    continue;
                 }
             }
             if(score > 3)
             {
-                Console.WriteLine($"Congratulations, your score is {score}.");
-                Thread.Sleep(1000);
-                Environment.Exit(0);
+                _results.Add(new Results
+                {
+                    ResultName = _name,
+                    ResultDate = _date,
+                    ResultScore = score
+                });
+                _menu.CongratulationsMethod(_name, _date, score);
             }
             else
             {
-                Console.WriteLine($"Maybe you will have better luck next time, your score is {score}.");
-                Thread.Sleep(1000);
-                Environment.Exit(0);
+                _results.Add(new Results
+                {
+                    ResultName = _name,
+                    ResultDate = _date,
+                    ResultScore = score
+                });
+                _menu.LoserMethod(_name, _date, score);
             }
         }
 
@@ -92,24 +139,41 @@ namespace Math_Game
                 int number2 = random.Next(1, 10);
 
                 Console.WriteLine($"{number1} * {number2} =");
-                string? result = Console.ReadLine();
+                string? input = Console.ReadLine();
+                int result;
 
-                if (Convert.ToInt32(result) == number1 * number2)
+                if (int.TryParse(input, out result))
                 {
-                    score++;
+                    if (result == number1 * number2)
+                    {
+                        score++;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input, please input the number !!!");
+                    continue;
                 }
             }
-            if(score > 3)
+            if (score > 3)
             {
-                Console.WriteLine($"Congratulations, your score is {score}.");
-                Thread.Sleep(1000);
-                Environment.Exit(0);
+                _results.Add(new Results
+                {
+                    ResultName = _name,
+                    ResultDate = _date,
+                    ResultScore = score
+                });
+                _menu.CongratulationsMethod(_name, _date, score);
             }
             else
             {
-                Console.WriteLine($"Maybe you will have better luck next time, your score is {score}.");
-                Thread.Sleep(1000);
-                Environment.Exit(0);
+                _results.Add(new Results
+                {
+                    ResultName = _name,
+                    ResultDate = _date,
+                    ResultScore = score
+                });
+                _menu.LoserMethod(_name, _date, score);
             }
         }
 
@@ -129,25 +193,43 @@ namespace Math_Game
                 } while (number1 % number2 != 0);
 
                 Console.WriteLine($"{number1} / {number2} =");
-                string? result = Console.ReadLine();
+                string? input = Console.ReadLine();
+                int result;
 
-                if (Convert.ToInt32(result) == number1 / number2)
+                if(int.TryParse(input, out result))
                 {
-                    score++;
+                    if (result == number1 / number2)
+                    {
+                        score++;
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("Invalid input, please input the number !!!");
+                    continue;
+
+                }                
             }
 
             if (score > 3)
             {
-                Console.WriteLine($"Congratulations, your score is {score}.");
-                Thread.Sleep(1000);
-                Environment.Exit(0);
+                _results.Add(new Results
+                {
+                    ResultName = _name,
+                    ResultDate = _date,
+                    ResultScore = score
+                });
+                _menu.CongratulationsMethod(_name, _date, score);
             }
             else
             {
-                Console.WriteLine($"Maybe you will have better luck next time, your score is {score}.");
-                Thread.Sleep(1000);
-                Environment.Exit(0);
+                _results.Add(new Results
+                {
+                    ResultName = _name,
+                    ResultDate = _date,
+                    ResultScore = score
+                });
+                _menu.LoserMethod(_name, _date, score);
             }
         }
     }
